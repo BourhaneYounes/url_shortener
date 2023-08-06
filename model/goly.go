@@ -36,3 +36,9 @@ func DeleteGoly(id uint64) error {
 	tx := db.Unscoped().Delete(&Goly{}, id)
 	return tx.Error
 }
+
+func FindByGolyUrl(url string) (Goly, error) {
+	var goly Goly
+	tx := db.Where("goly = ?", url).First(&goly)
+	return goly, tx.Error
+}
